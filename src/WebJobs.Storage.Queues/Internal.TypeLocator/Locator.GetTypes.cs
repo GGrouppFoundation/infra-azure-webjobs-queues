@@ -5,5 +5,5 @@ namespace GGroupp.Infra;
 
 partial class QueueItemProcessorTypeLocator
 {
-    public IReadOnlyList<Type> GetTypes() => new[] { typeof(QueueItemProcessorFunction) };
+    public IReadOnlyList<Type> GetTypes() => new[] { typeof(QueueItemHandlerFunction) };
 }

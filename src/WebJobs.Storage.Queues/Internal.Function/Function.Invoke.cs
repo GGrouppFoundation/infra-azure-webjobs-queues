@@ -6,7 +6,7 @@ using Microsoft.Extensions.Logging;
 
 namespace GGroupp.Infra;
 
-partial class QueueItemProcessorFunction
+partial class QueueItemHandlerFunction
 {
     public async Task InvokeAsync([QueueTrigger("%QueueIn:Name%")] string message, string id, CancellationToken cancellationToken)
     {
@@ -16,7 +16,7 @@ partial class QueueItemProcessorFunction
         }
 
         var input = new QueueItemIn(id: id, message: message);
-        var result = await ProcessAsync(input, cancellationToken).ConfigureAwait(false);
+        var result = await HandleAsync(input, cancellationToken).ConfigureAwait(false);
 
         _ = result.Fold(InnerProcessSuccess, InnerProcessFailure);
 
@@ -29,11 +29,11 @@ partial class QueueItemProcessorFunction
             ProcessFailure(failure, id);
     }
 
-    private async ValueTask<Result<Unit, QueueItemFailure>> ProcessAsync(QueueItemIn input, CancellationToken cancellationToken)
+    private async ValueTask<Result<Unit, QueueItemFailure>> HandleAsync(QueueItemIn input, CancellationToken cancellationToken)
     {
         try
         {
-            return await queueItemProcessor.ProcessAsync(input, cancellationToken).ConfigureAwait(false);
+            return await queueItemHandler.HandleAsync(input, cancellationToken).ConfigureAwait(false);
         }
         catch (OperationCanceledException exception)
         {

@@ -7,25 +7,25 @@ using Microsoft.Extensions.DependencyInjection;
 
 namespace Microsoft.Extensions.Hosting;
 
-public static class QueueItemProcessorHostBuilderExtensions
+public static class QueueItemHandlerHostBuilderExtensions
 {
     public static IHostBuilder ConfigureQueueProcessor(
-        this IHostBuilder hostBuilder, Func<IServiceProvider, IQueueItemProcessor> queueItemProcessorResolver)
+        this IHostBuilder hostBuilder, Func<IServiceProvider, IQueueItemHandler> queueItemHandlerResolver)
     {
         _ = hostBuilder ?? throw new ArgumentNullException(nameof(hostBuilder));
-        _ = queueItemProcessorResolver ?? throw new ArgumentNullException(nameof(queueItemProcessorResolver));
+        _ = queueItemHandlerResolver ?? throw new ArgumentNullException(nameof(queueItemHandlerResolver));
 
         return hostBuilder.ConfigureServices(ConfigureServices).ConfigureWebJobs(ConfigureWebJobs);
 
         void ConfigureServices(IServiceCollection services)
             =>
-            services.ConfigureQueueProcessorServices(queueItemProcessorResolver);
+            services.ConfigureQueueProcessorServices(queueItemHandlerResolver);
     }
 
     private static void ConfigureQueueProcessorServices(
-        this IServiceCollection services, Func<IServiceProvider, IQueueItemProcessor> queueItemProcessorResolver)
+        this IServiceCollection services, Func<IServiceProvider, IQueueItemHandler> queueItemHandlerResolver)
     {
-        _ = services.AddSingleton(ResolveNameResolver).AddSingleton(queueItemProcessorResolver).AddSingleton(ResolveTypeLocator);
+        _ = services.AddSingleton(ResolveNameResolver).AddSingleton(queueItemHandlerResolver).AddSingleton(ResolveTypeLocator);
 
         INameResolver ResolveNameResolver(IServiceProvider serviceProvider)
         {
