@@ -8,13 +8,15 @@
     <TreatWarningsAsErrors>true</TreatWarningsAsErrors>
     <RootNamespace>GGroupp.Infra</RootNamespace>
     <AssemblyName>GGroupp.Infra.Azure.WebJobs.Storage.Queues</AssemblyName>
-    <Version>1.1.0</Version>
+    <Version>1.2.0</Version>
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="GGroupp.Infra.Azure.WebJobs.Storage.Queues.Abstractions" Version="1.1.0" />
+    <PackageReference Include="GGroupp.Infra.Azure.WebJobs.Storage.Queues.Abstractions" Version="1.2.0" />
     <PackageReference Include="Microsoft.Azure.WebJobs.Extensions" Version="4.0.1" />
     <PackageReference Include="Microsoft.Azure.WebJobs.Extensions.Storage.Queues" Version="5.0.1" />
+    <PackageReference Include="PrimeFuncPack.Dependency.Core" Version="2.0.2" />
+    <PackageReference Include="PrimeFuncPack.Primitives.Pipeline" Version="2.0.1" />
   </ItemGroup>
 
 </Project>
