@@ -1,1 +1,1 @@
-# infra-azure-webjobs-storage-queues
+# infra-azure-webjobs-queues
