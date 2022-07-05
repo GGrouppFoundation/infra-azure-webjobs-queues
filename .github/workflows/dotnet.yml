@@ -27,27 +27,38 @@ jobs:
     - name: Add GGroupp NuGet Source
       run: dotnet nuget add source ${{ secrets.GGROUPP_NUGET_SOURCE_URL }} -n ggroupp -u ${{ secrets.GGROUPP_NUGET_SOURCE_USER_NAME }} -p ${{ secrets.GGROUPP_NUGET_SOURCE_USER_PASSWORD }} --store-password-in-clear-text
 
-    # WebJobs.Storage.Queues.Abstractions
+    # Queues.Abstractions
 
-    - name: Restore WebJobs.Storage.Queues.Abstractions
-      run: dotnet restore ./src/*/WebJobs.Storage.Queues.Abstractions.csproj
+    - name: Restore Queues.Abstractions
+      run: dotnet restore ./src/*/Queues.Abstractions.csproj
 
-    - name: Build WebJobs.Storage.Queues.Abstractions
-      run: dotnet build ./src/*/WebJobs.Storage.Queues.Abstractions.csproj --no-restore  -c Release
+    - name: Build Queues.Abstractions
+      run: dotnet build ./src/*/Queues.Abstractions.csproj --no-restore  -c Release
 
-    - name: Pack WebJobs.Storage.Queues.Abstractions
-      run: dotnet pack ./src/*/WebJobs.Storage.Queues.Abstractions.csproj --no-restore -o ~/nuget  -c Release
+    - name: Pack Queues.Abstractions
+      run: dotnet pack ./src/*/Queues.Abstractions.csproj --no-restore -o ~/nuget  -c Release
 
-    # WebJobs.Storage.Queues
+    # Queues.Storage
 
-    - name: Restore WebJobs.Storage.Queues
-      run: dotnet restore ./src/*/WebJobs.Storage.Queues.csproj
+    - name: Restore Queues.Storage
+      run: dotnet restore ./src/*/Queues.Storage.csproj
 
-    - name: Build WebJobs.Storage.Queues
-      run: dotnet build ./src/*/WebJobs.Storage.Queues.csproj --no-restore  -c Release
+    - name: Build Queues.Storage
+      run: dotnet build ./src/*/Queues.Storage.csproj --no-restore  -c Release
 
-    - name: Pack WebJobs.Storage.Queues
-      run: dotnet pack ./src/*/WebJobs.Storage.Queues.csproj --no-restore -o ~/nuget  -c Release
+    - name: Pack Queues.Storage
+      run: dotnet pack ./src/*/Queues.Storage.csproj --no-restore -o ~/nuget  -c Release
+
+    # Queues.ServiceBus
+
+    - name: Restore Queues.ServiceBus
+      run: dotnet restore ./src/*/Queues.ServiceBus.csproj
+
+    - name: Build Queues.ServiceBus
+      run: dotnet build ./src/*/Queues.ServiceBus.csproj --no-restore  -c Release
+
+    - name: Pack Queues.ServiceBus
+      run: dotnet pack ./src/*/Queues.ServiceBus.csproj --no-restore -o ~/nuget  -c Release
 
     # Push
 
