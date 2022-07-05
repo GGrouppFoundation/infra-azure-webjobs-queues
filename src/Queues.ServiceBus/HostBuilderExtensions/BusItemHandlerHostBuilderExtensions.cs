@@ -38,19 +38,16 @@ public static partial class BusItemHandlerHostBuilderExtensions
             busOptions.PrefetchCount = options.PrefetchCount.Value;
         }
 
-        if (options.Retry is not null && busOptions.ClientRetryOptions is null)
+        if (busOptions.ClientRetryOptions is null)
         {
             busOptions.ClientRetryOptions = new();
         }
 
+        busOptions.ClientRetryOptions.MaxRetries = options.Retry?.MaxRetries ?? DefaultMaxRetries;
+
         if (options.Retry?.Mode is not null)
         {
             busOptions.ClientRetryOptions.Mode = options.Retry.Mode.Value;
-        }
-
-        if (options.Retry?.MaxRetries is not null)
-        {
-            busOptions.ClientRetryOptions.MaxRetries = options.Retry.MaxRetries.Value;
         }
 
         if (options.Retry?.Delay is not null)
