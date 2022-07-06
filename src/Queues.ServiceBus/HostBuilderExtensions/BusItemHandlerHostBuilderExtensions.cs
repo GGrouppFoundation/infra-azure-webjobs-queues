@@ -14,7 +14,7 @@ public static partial class BusItemHandlerHostBuilderExtensions
 
     private static void ConfigureWebJobs(HostBuilderContext context, IWebJobsBuilder builder)
         =>
-        builder.AddAzureStorageCoreServices().AddExecutionContextBinding().AddServiceBus(context.ConfigureQueueOptions);
+        builder.AddAzureStorageCoreServices().AddServiceBus(context.ConfigureQueueOptions);
 
     private static IServiceCollection AddTypeLocator<TFunction>(this IServiceCollection services)
     {
